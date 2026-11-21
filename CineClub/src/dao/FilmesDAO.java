@@ -1,6 +1,8 @@
 package dao;
 
 import model.Filmes;
+import util.ResultadoCadastro;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,18 +16,18 @@ public class FilmesDAO {
 
         String sql = "INSERT INTO Filmes "
                 + "(nome, genero, duracao, sinopse, formato, valor, quantidade, poster) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, filme.getNome());
             stmt.setString(2, filme.getGen());
             stmt.setInt(3, filme.getDurc());
-            stmt.setBigDecimal(4, filme.getVal());
-            stmt.setInt(5, filme.getQuant());
-            stmt.setString(6, filme.getForm());
-            stmt.setString(7, filme.getSinp());
+            stmt.setString(4, filme.getSinp());
+            stmt.setString(5, filme.getForm());
+            stmt.setBigDecimal(6, filme.getVal());
+            stmt.setInt(7, filme.getQuant());
             stmt.setString(8, filme.getPoster());
 
             stmt.executeUpdate();
@@ -56,9 +58,10 @@ public class FilmesDAO {
                 filme.setNome(rs.getString("nome"));
                 filme.setGen(rs.getString("genero"));
                 filme.setDurc(rs.getInt("duracao"));
+                filme.setSinp(rs.getString("sinopse"));
+                filme.setForm(rs.getString("formato"));
                 filme.setVal(rs.getBigDecimal("valor"));
                 filme.setQuant(rs.getInt("quantidade"));
-                filme.setAno(rs.getInt("ano_lancamento"));
                 filme.setPoster(rs.getString("poster"));
 
                 lista.add(filme);
@@ -91,10 +94,10 @@ public class FilmesDAO {
                     filme.setNome(rs.getString("nome"));
                     filme.setGen(rs.getString("genero"));
                     filme.setDurc(rs.getInt("duracao"));
-                    filme.setValDia(rs.getBigDecimal("valor_diaria"));
+                    filme.setSinp(rs.getString("sinopse"));
+                    filme.setForm(rs.getString("formato"));
+                    filme.setVal(rs.getBigDecimal("valor"));
                     filme.setQuant(rs.getInt("quantidade"));
-                    filme.setClasf(rs.getString("classificacao"));
-                    filme.setAno(rs.getInt("ano_lancamento"));
                     filme.setPoster(rs.getString("poster"));
 
                     return filme;
@@ -131,11 +134,11 @@ public class FilmesDAO {
     // ATUALIZAR FILME
     public boolean gravar(Filmes filme) {
 
-        String sql = "UPDATE Filmes SET "
-                + "nome = ?, genero = ?, duracao = ?, "
-                + "valor_diaria = ?, quantidade = ?, "
-                + "classificacao = ?, ano_lancamento = ?, poster = ? "
-                + "WHERE id = ?";
+        String sql = "UPDATE filmes SET "
+               + "nome = ?, genero = ?, duracao = ?, "
+               + "sinopse = ?, formato = ?, valor = ?, "
+               + "quantidade = ?, poster = ? "
+               + "WHERE id = ?";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -143,10 +146,10 @@ public class FilmesDAO {
             stmt.setString(1, filme.getNome());
             stmt.setString(2, filme.getGen());
             stmt.setInt(3, filme.getDurc());
-            stmt.setBigDecimal(4, filme.getValDia());
-            stmt.setInt(5, filme.getQuant());
-            stmt.setString(6, filme.getClasf());
-            stmt.setInt(7, filme.getAno());
+            stmt.setString(4, filme.getSinp());
+            stmt.setString(5, filme.getForm());
+            stmt.setBigDecimal(6, filme.getVal());
+            stmt.setInt(7, filme.getQuant());
             stmt.setString(8, filme.getPoster());
             stmt.setInt(9, filme.getID());
 

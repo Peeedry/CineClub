@@ -97,7 +97,7 @@ public class UsuariosDAO {
                 u.setId(rs.getInt("id"));
                 u.setEmail(rs.getString("email"));
                 u.setNome(rs.getString("nome"));
-                u.setAtivo(rs.getBoolean("ativo"));
+                u.setAtivo(rs.getString("ativo"));
                 u.setSenha(rs.getString("senha"));
                 u.setTipo(rs.getString("tipo"));
 
@@ -146,7 +146,7 @@ public class UsuariosDAO {
                     u.setId(rs.getInt("id"));
                     u.setEmail(rs.getString("email"));
                     u.setNome(rs.getString("nome"));
-                    u.setAtivo(rs.getBoolean("ativo"));
+                    u.setAtivo(rs.getString("ativo"));
                     u.setSenha(rs.getString("senha"));
                     u.setTipo(rs.getString("tipo"));
 
@@ -168,7 +168,7 @@ public class UsuariosDAO {
 
                 stmt.setString(1, u.getEmail());
                 stmt.setString(2, u.getSenha());
-                stmt.setBoolean(3, u.setAtivo());
+                stmt.setString(3, u.getAtivo());
                 stmt.setString(4, u.getNome());
                 stmt.setInt(5, u.getId());
 

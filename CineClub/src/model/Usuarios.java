@@ -1,4 +1,3 @@
-
 package model;
 
 public class Usuarios {
@@ -9,7 +8,7 @@ public class Usuarios {
     private String email;
     private String senha;
     private String tipo;
-    private boolean ativo;
+    private String ativo;
 
     // Construtor vazio
     public Usuarios() {
@@ -66,11 +65,11 @@ public class Usuarios {
         this.tipo = tipo;
     }
 
-    public boolean setAtivo() {
+    public String getAtivo() {
         return this.ativo;
     }
 
-    public void setAtivo(boolean ativo) {
+    public void setAtivo(String ativo) {
         this.ativo = ativo;
     }
 }
